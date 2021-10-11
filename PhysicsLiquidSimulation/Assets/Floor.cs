@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Floor : MonoBehaviour
+public class Floor : PhysicsBody
 {
     public float xPos
     {

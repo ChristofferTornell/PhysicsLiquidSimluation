@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Particle : MonoBehaviour
+public class Particle : PhysicsBody
 {
     public Vector3 Position
     {
@@ -13,19 +13,32 @@ public class Particle : MonoBehaviour
     public Vector3 ExternalAcceleration
     {
         get {
-            return collisionVelocity * ParticleManager.inverseTimestep;
+            return Vector3.zero;
         }
     }
     public Vector3 ImaginaryPosition
     {
         get {
-            return Position + velocity;
+            return Position + forceVelocity;
         }
     }
     [HideInInspector] public Vector3 collisionVelocity;
-    [HideInInspector] public Vector3 velocity;
-    float density;
+    [HideInInspector] public Vector3 forceVelocity;
+
+    [HideInInspector] public Vector3 previousPos;
+    [HideInInspector] public Vector3 v;
+    public Vector3 velocity
+    {
+        get {
+            return forceVelocity + collisionVelocity;
+        }
+    }
+    [HideInInspector] public float Density;
+    [HideInInspector] public float NearDensity;
+
     [HideInInspector] public float Pressure;
+    [HideInInspector] public float NearPressure;
+
     Color color;
     float force;
     int id;
